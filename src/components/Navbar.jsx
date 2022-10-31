@@ -14,7 +14,7 @@ function Navbar() {
       </div>
       <div>
         <ul className="flex items-center space-x-6">
-          <li>
+          <li className="">
             <Link to="/">Dashbord</Link>
           </li>
           <li>
