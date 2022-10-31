@@ -14,6 +14,7 @@ import {
 } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { logedUser } from "./redux/userSlice";
+import New_member_form from "./components/New_member_form";
 
 const Layout = () => {
   const user = useSelector(logedUser);
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "/new_task_form",
         element: <New_task_form />,
+      },
+      {
+        path: "/new_member_form",
+        element: <New_member_form />,
       },
     ],
   },
