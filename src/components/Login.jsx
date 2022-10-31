@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, redirect, Route, Router, useNavigate } from "react-router-dom";
+import {
+  Navigate,
+  redirect,
+  Route,
+  Router,
+  useNavigate,
+} from "react-router-dom";
 import { logedUser, update } from "../redux/userSlice";
 
 function Login() {
@@ -16,12 +22,8 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(update(values));
-    
-      return navigate("/");
-    
-    
-    
 
+    return navigate("/");
   };
 
   const onChange = (e) => {

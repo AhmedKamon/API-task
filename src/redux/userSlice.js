@@ -11,8 +11,9 @@ export const userSlice = createSlice({
       state.name = action.payload.name;
       state.password = action.payload.password;
     },
-    remove: (state) => {
-      state = null;
+    remove: (state,action) => {
+      state.name = '';
+      state.password = '';
     },
     addHelloToName : (state, action) =>{
       state.name = "Hello " + action.payload.name
