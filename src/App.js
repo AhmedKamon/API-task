@@ -17,6 +17,7 @@ import { logedUser } from "./redux/userSlice";
 
 const Layout = () => {
   const user = useSelector(logedUser);
+  console.log(user)
   return (
     
     <>

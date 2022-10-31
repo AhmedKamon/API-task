@@ -1,17 +1,27 @@
 import React, { useState } from 'react'
+import { useDispatch, } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { addTask, } from '../redux/taskSlice';
 
 function New_task_form() {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const today = Date.now();
+  const formatDate = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(today);
+  const uuid = Math.random() * 100 +today 
   const [values, setValues] = useState({
     title: "",
     description: "",
     assign_to: "",
+    date: formatDate,
+    uid:uuid
   });
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values)
+    dispatch(addTask(values));
     navigate('/task')
+    
   };
 
   const onChange = (e) => {

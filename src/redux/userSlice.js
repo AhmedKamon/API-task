@@ -15,9 +15,6 @@ export const userSlice = createSlice({
       state.name = '';
       state.password = '';
     },
-    addHelloToName : (state, action) =>{
-      state.name = "Hello " + action.payload.name
-    }
   },
 });
 

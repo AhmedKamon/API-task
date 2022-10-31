@@ -6,7 +6,6 @@ import { logedUser, remove } from "../redux/userSlice";
 function Navbar() {
   const user = useSelector(logedUser);
   const dispatch = useDispatch();
-  console.log(user, "navbar");
   return (
     <div className="bg-gray-50 flex justify-between items-center p-5">
       <div>
