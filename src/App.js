@@ -12,12 +12,19 @@ import {
   Route,
   Outlet,
 } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { logedUser } from "./redux/userSlice";
+
 const Layout = () => {
+  const user = useSelector(logedUser);
   return (
+    
+    <>
+    {user.name ? 
     <>
       <Navbar />
       <Outlet />
-      <Footer />
+      <Footer /></> : <Login />}
     </>
   );
 };
@@ -55,6 +62,8 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
+  const user = useSelector(logedUser);
+  console.log(user, "user redux");
   return (
     <div className="">
       <RouterProvider router={router} />
