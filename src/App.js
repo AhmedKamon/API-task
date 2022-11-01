@@ -15,6 +15,7 @@ import {
 import { useSelector } from "react-redux";
 import { logedUser } from "./redux/userSlice";
 import New_member_form from "./components/New_member_form";
+import SingelTask from "./components/SingelTask";
 
 const Layout = () => {
   const user = useSelector(logedUser);
@@ -53,11 +54,19 @@ const router = createBrowserRouter([
         element: <Task />,
       },
       {
+        path: "/task/:id",
+        element: <SingelTask />,
+      },
+      {
         path: "/edit",
         element: <Member />,
       },
       {
         path: "/new_task_form",
+        element: <New_task_form />,
+      },
+      {
+        path: "/update/:id",
         element: <New_task_form />,
       },
       {

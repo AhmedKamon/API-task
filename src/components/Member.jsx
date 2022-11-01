@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { membersFromStore, removeMembers } from "../redux/memberSlice";
-import { tasksFromStore } from "../redux/taskSlice";
+import {  tasksFromStore } from "../redux/taskSlice";
 
 function Member() {
   const { members } = useSelector(membersFromStore);
@@ -46,6 +46,7 @@ function Member() {
                 >
                   delete
                 </button>
+                
               </li>
             ))}
         </ul>
