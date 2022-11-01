@@ -5,9 +5,13 @@ import { removeTasks, tasksFromStore } from "../redux/taskSlice";
 
 function Task() {
   const { tasks } = useSelector(tasksFromStore);
+  console.log(tasks,'tsks')
   const dispatch = useDispatch();
   const removeItemFromBasket = (id) => {
-    dispatch(removeTasks({id}));}
+    dispatch(removeTasks({ id }));
+  };
+  
+
   return (
     <div className="flex px-32 py-10 h-[calc(100vh-6rem)]">
       <div className="flex-1">
@@ -15,12 +19,17 @@ function Task() {
         <ul className="list-disc">
           {tasks &&
             tasks.map((task) => (
-              <li key={task.uid} >
+              <li key={task.uid}>
                 <p>Title: {task.title}</p>
                 <p>Description: {task.description}</p>
                 <p>Assign To: {task.assign_to}</p>
                 <p>Creation Date: {task.date}</p>
-                <button onClick={()=>removeItemFromBasket(task.uid)} className="bg-red-400 px-4 py-2 my-2 rounded-sm text-white">delete</button>
+                <button
+                  onClick={() => removeItemFromBasket(task.uid)}
+                  className="bg-red-400 px-4 py-2 my-2 rounded-sm text-white"
+                >
+                  delete
+                </button>
               </li>
             ))}
         </ul>

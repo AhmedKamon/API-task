@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import { useDispatch, } from 'react-redux';
+import { useDispatch, useSelector, } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { membersFromStore } from '../redux/memberSlice';
 import { addTask, } from '../redux/taskSlice';
 
 function New_task_form() {
   const navigate = useNavigate();
   const dispatch = useDispatch()
+  const { members } = useSelector(membersFromStore);
   const today = Date.now();
   const formatDate = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(today);
   const uuid = Math.random() * 100 +today 
@@ -52,8 +54,7 @@ function New_task_form() {
         <div className=''>
           <label className='block mb-2 ' htmlFor="user">Assign to</label>
           <select onChange={onChange} name="assign_to" id="" className='border-2 p-2 w-full border-black focus:border-gray-400 focus:outline-none'>
-            <option value="kamon">Kamon</option>
-            <option value="zaman">Zaman</option>
+            { members && members.map(member => <option value={`${member.name}`}>{member.name}</option> )}
             <option value="mohi">Mohi</option>
           </select>
         </div>
