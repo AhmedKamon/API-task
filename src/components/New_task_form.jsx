@@ -24,10 +24,17 @@ function New_task_form() {
     updated: id && formatDate
   });
   
+  useEffect(() => {
+    if (single[0]?.title) {
+      setValues({
+        ...single[0],
+      });
+    }
+  }, []);
   const handleSubmit = (e) => {
     e.preventDefault();
     !id && dispatch(addTask(values));
-    id && dispatch(updateTasks(values));
+    id && dispatch(updateTasks(values, id));
     navigate('/task')
     
   };
@@ -52,12 +59,12 @@ function New_task_form() {
         <h1 className='text-center font-bold my-10'>{id ? 'update' : 'Create'}</h1>
         <div className='mb-3'>
           <label className='block mb-2 ' htmlFor="user">Title</label>
-          <input value={id ? single[0].title : values["title"]}
+          <input value={ values["title"]}
               onChange={onChange} name='title' className=' border-2 p-2 w-full border-black focus:border-gray-400 focus:outline-none'  type="text" required />
         </div>
         <div className='mb-3'>
           <label className='block mb-2 ' htmlFor="user">Description</label>
-          <input value={ id ? single[0].description : values["description"]}
+          <input value={  values["description"]}
               onChange={onChange} name='description' className=' border-2 p-2 w-full border-black focus:border-gray-400 focus:outline-none'  type="text"  />
         </div>
         <div className=''>
