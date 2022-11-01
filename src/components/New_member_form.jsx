@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
-import { useDispatch, } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { addMember } from '../redux/memberSlice';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector, } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { addMember, membersFromStore, updateMembers } from '../redux/memberSlice';
 import { addTask, } from '../redux/taskSlice';
 
 function New_member_form() {
+  const {id} = useParams()
+  console.log(id,'id mem')
+  const { members } = useSelector(membersFromStore);
+  var single = members.filter(function (member) { return member.uid == id; });
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const today = Date.now();
@@ -16,11 +20,19 @@ function New_member_form() {
     date: formatDate,
     uid:uuid
   });
+  useEffect(() => {
+    if (single[0]?.name) {
+      setValues({
+        ...single[0],
+      });
+    }
+  }, []);
   
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(values,'member')
-    dispatch(addMember(values));
+    !id && dispatch(addMember(values));
+    id && dispatch(updateMembers(values, id));
     navigate('/member')
     
   };
@@ -34,12 +46,12 @@ function New_member_form() {
       <div className='flex-1 flex justify-center items-center'>
         <div className=' text-center'>
           <img src="/Settings-icon.png" className='w-32' alt="" />
-          <h1 className='font-bold text-lg text-gray-900'>Create</h1>
+          <h1 className='font-bold text-lg text-gray-900'>{id ?'update': 'Create'}</h1>
           <h3 className='font-bold text-lg text-gray-900'>New Member</h3>
         </div>
       </div>
       <div className='flex-1 p-12'>
-        <h1 className='text-center font-bold my-10'>Create</h1>
+        <h1 className='text-center font-bold my-10'>{id ?'update': 'Create'}</h1>
         <div className='mb-3'>
           <label className='block mb-2 ' htmlFor="user">Name</label>
           <input value={values["name"]}
@@ -50,8 +62,8 @@ function New_member_form() {
           <input value={values["email"]}
               onChange={onChange} name='email' className=' border-2 p-2 w-full border-black focus:border-gray-400 focus:outline-none'  type="text"  />
         </div>
-        
-        <button className='bg-teal-600 text-white w-full py-2 my-10 rounded-md'>Create A Member</button>
+        {id?<button className='bg-teal-600 text-white w-full py-2 my-10 rounded-md' onClick={()=>updateMembers(id)}>update a Member </button>:
+        <button className='bg-teal-600 text-white w-full py-2 my-10 rounded-md'>Create a Member</button>}
       </div>
     </form>
   </div>

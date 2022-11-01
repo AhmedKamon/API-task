@@ -1,10 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { membersFromStore, removeMembers } from "../redux/memberSlice";
 import {  tasksFromStore } from "../redux/taskSlice";
 
 function Member() {
+  const {id} = useParams()
+  console.log(id,'mem')
   const { members } = useSelector(membersFromStore);
   const { tasks } = useSelector(tasksFromStore);
   console.log(members, "mem");
@@ -46,10 +48,12 @@ function Member() {
                 >
                   delete
                 </button>
+                <div className="bg-green-400 px-4 py-2 inline-block"><Link to={`/member/${task.uid}`}>update</Link></div>
                 
               </li>
             ))}
         </ul>
+
       </div>
       <div className="flex-1">
         <Link

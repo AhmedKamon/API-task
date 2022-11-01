@@ -73,6 +73,10 @@ const router = createBrowserRouter([
         path: "/new_member_form",
         element: <New_member_form />,
       },
+      {
+        path: "/member/:id",
+        element: <New_member_form />,
+      },
     ],
   },
 ]);
